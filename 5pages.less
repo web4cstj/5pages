@@ -1,0 +1,387 @@
+:root {
+	font-size: 12pt;
+	font-family: arial;
+}
+
+body {
+	margin: 0;
+}
+
+div.interface {
+	padding: 1em;
+	position: relative;
+}
+
+h1 {
+	text-align: center;
+	margin: 0;
+	font-size: 3em;
+}
+
+table.cinqpages {
+	--fond-connexion: hsl(60, 100%, 95%);
+	--fond-connexion-entete: hsl(60, 80%, 50%);
+	--fond-traitement: hsl(120, 100%, 95%);
+	--fond-traitement-entete: hsl(120, 50%, 70%);
+	--fond-composition: hsl(180, 100%, 95%);
+	--fond-composition-entete: hsl(180, 50%, 70%);
+	--fond-affichage: hsl(240, 100%, 95%);
+	--fond-affichage-entete: hsl(240, 50%, 70%);
+
+	font-family: arial;
+	border: 2px solid black;
+	border-collapse: collapse;
+	margin: 0 auto;
+	width: 100%;
+	& td,
+	& th {
+		font-family: arial;
+		border: 1px solid black;
+	}
+	& col.nom {
+//		width: 25em;
+	}
+	& colgroup.coches {
+		& col {
+			width: 2.5em;
+			&:nth-child(odd) {
+				background-color: rgba(0, 0, 0, .2);
+			}
+		}
+	}
+	& thead {
+		background-color: rgba(0, 0, 0, 1);
+		color: white;
+		& th {
+			border-color: white;
+		}
+	}
+}
+tbody {
+	&.connexion {
+		background-color: var(--fond-connexion);
+	}
+	&.traitement {
+		background-color: var(--fond-traitement);
+	}
+	&.composition {
+		background-color: var(--fond-composition);
+	}
+	&.affichage {
+		background-color: var(--fond-affichage);
+	}
+}
+
+table {
+	counter-reset: noligne;
+}
+
+tbody > tr:not(.entete) > td:first-child {
+	counter-increment: noligne;
+}
+
+#numeroter:checked ~ * tbody > tr:not(.entete) > td:first-child:before {
+	content: counter(noligne, lower-alpha) ". ";
+}
+
+tbody > tr:not(.entete):hover {
+	background-color: rgba(0, 0, 0, .8);
+	color: white;
+}
+
+thead,
+tfoot,
+tbody {
+	display: table-row-group;
+	border: 3px solid black;
+}
+
+footer {
+	height: 3em;
+}
+
+tbody.connexion tr.entete {
+	background-color: var(--fond-connexion-entete);
+}
+tbody.traitement tr.entete {
+	background-color: var(--fond-traitement-entete);
+}
+tbody.composition tr.entete {
+	background-color: var(--fond-composition-entete);
+}
+tbody.affichage tr.entete {
+	background-color: var(--fond-affichage-entete);
+}
+
+td > div {
+	display: none;
+	font-size: smaller;
+	padding: .5em;
+	margin: .5em;
+	border-radius: .5em;
+	background-color: rgba(255, 255, 255, 1);
+	color: black;
+	border: 1px solid #ccc;
+	& > p {
+		margin: .5em 0;
+		&:first-child {
+			margin-top: 0;
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+}
+tr:not(.entete) {
+	&:hover,
+	&.on {
+		& > td > div {
+			display: block;
+		}
+	}
+
+}
+
+tr.liste td.liste,
+tr.details td.details,
+tr.ajout td.ajout,
+tr.modif td.modif,
+tr.suppr td.suppr {
+	&::before {
+		content: "\2714";
+		color: rgba(0, 0, 0, 1);
+		font-weight: bold;
+	}
+}
+
+table.liste,
+table.details,
+table.ajout,
+table.modif,
+table.suppr {
+	td > div {
+		display: block;
+	}
+}
+
+td a {
+	text-decoration-style: dashed;
+	text-decoration-skip-ink: none;
+	text-decoration-skip: none;
+	color: inherit;
+	text-decoration-color: rgba(0,0,0,.3);
+	&:hover {
+		text-decoration-color: rgba(0,0,0,1);
+		text-decoration-style: solid;
+
+	}
+}
+td[class] {
+	text-align: center;
+	font-size: 1.5em;
+	vertical-align: top;
+	&::before {
+		content: "\2717";
+		color: rgba(0, 0, 0, 0.1);
+	}
+}
+td:not([class]) {
+	padding: .5em .5em;
+}
+thead th {
+	@hauteur: 5em;
+	height: @hauteur;
+	vertical-align: bottom;
+	text-align: center;
+	position: relative;
+	& > span {
+		display: flex;
+		align-items: flex-end;
+		justify-content: flex-end;
+		width: 0;
+		margin: 0 auto;
+		& > em {
+			padding: 0 .5ch;
+			line-height: 0;
+			transform: rotate(90deg);
+			transform-origin: right center;
+		}
+	}
+	&[class] {
+		cursor: pointer;
+		&::before {
+			font-family: "Segoe UI Symbol";
+			content: "\1f513";
+			position: absolute;
+			top:0;
+			left:0;
+			right:0;
+			margin: 0 auto;
+			text-align: center;
+			opacity: .2;
+		}
+	}
+}
+table.liste thead th.liste,
+table.details thead th.details,
+table.ajout thead th.ajout,
+table.modif thead th.modif,
+table.suppr thead th.suppr {
+	&::before {
+		color:yellow;
+		opacity: 1;
+		content: "\1f512";
+	}
+}
+@keyframes tourner {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(30deg);
+	}
+}
+
+input[type=checkbox] {
+	display: none;
+}
+
+#toutafficher:checked ~ * td > div {
+	display: block;
+}
+
+#toutafficher:checked ~ * label[for=toutafficher],
+#numeroter:checked ~ * label[for=numeroter] {
+//	box-shadow: -.1em -.1em .1em rgba(255, 255, 255, 1) inset, .1em .1em .1em rgba(0, 0, 0, .5) inset;
+	background: #ddd;
+	opacity: 1;
+	&::before {
+		content: "\1f512";
+	}
+}
+
+div.options {
+	position: absolute;
+	//width: 10em;
+	top: 1em;
+	right: 1em;
+	font-size: smaller;
+	label[for=toutafficher]::before {
+		content: "\1f513";
+		font-family: "Segoe UI Symbol";
+	}
+}
+
+label {
+	text-align: center;
+	display: block;
+	opacity: .3;
+	transition: .5s;
+	font-size: smaller;
+	font-family: arial;
+//	border: 1px solid black;
+	border-radius: .3em;
+	padding: .2em 1em;
+	background: #EEE;
+	color: black;
+//	box-shadow: .1em .1em .1em rgba(255, 255, 255, 1) inset, -.1em -.1em .1em rgba(0, 0, 0, .5) inset;
+	&:hover {
+		opacity: 1;
+	}
+}
+
+footer {
+	margin-top: 1em;
+}
+.afficher(@classe) {
+	table.@{classe} {
+		tbody tr {
+			&:not(.@{classe}):not(.entete) {
+				display:none;
+			}
+		}
+		td, th {
+			&[class]:not(.@{classe}) {
+				display:none;
+			}
+		}
+		col[class]:not(.@{classe}) {
+			display:none;
+		}
+	}
+}
+
+.afficher(liste);
+.afficher(details);
+.afficher(ajout);
+.afficher(modif);
+.afficher(suppr);
+
+table.liste, table.details {
+	tbody.traitement {
+		display: none;
+	}
+}
+
+@page {
+	size: 8.5in 11in;
+	margin: .5in .75in;
+}
+@media print {
+	tr, tbody {
+		page-break-inside: avoid;
+	}
+
+	div.instructions,
+	div.legende,
+	label {
+		display: none;
+	}
+//	body {
+//		margin: .5in;
+//	}
+	div.interface {}
+	tbody {
+		background-color: transparent !important;
+	}
+//	tbody.traitement {
+//		background-color: rgba(0, 0, 0, .1) !important;
+//	}
+	table.cinqpages thead {
+	  background-color: white;
+	  color: black;
+		& th {
+		  border-color: unset;
+			&::before {
+				display: none;
+			}
+		}
+	}
+}
+
+@media screen {
+	tr.on > td:first-child::before {
+		content: "\1f512";
+		font-family: "Segoe UI Symbol";
+		float: left;
+		color:hsl(60, 50%, 50%);
+		text-shadow: 1px 1px rgba(0,0,0,.5);
+		margin-left: -2em;
+		margin-top: -.3em;
+		cursor: pointer;
+	}
+	body {
+		background-color: black;
+		color: white;
+	}
+	div.interface {
+		width: 8.5in;
+		padding: .5in .75in;
+		background: white;
+		color: black;
+		margin: 0 auto;
+		box-sizing: border-box;
+	}
+}
