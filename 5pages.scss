@@ -33,26 +33,26 @@ table.cinqpages {
 	border-collapse: collapse;
 	margin: 0 auto;
 	width: 100%;
-	& td,
-	& th {
+	td,
+	th {
 		font-family: arial;
 		border: 1px solid black;
 	}
-	& col.nom {
-//		width: 25em;
-	}
-	& colgroup.coches {
-		& col {
+	// col.nom {
+	// 	width: 25em;
+	// }
+	colgroup.coches {
+		col {
 			width: 2.5em;
 			&:nth-child(odd) {
 				background-color: rgba(0, 0, 0, .2);
 			}
 		}
 	}
-	& thead {
+	thead {
 		background-color: rgba(0, 0, 0, 1);
 		color: white;
-		& th {
+		th {
 			border-color: white;
 		}
 	}
@@ -121,8 +121,9 @@ td > div {
 	border-radius: .5em;
 	background-color: rgba(255, 255, 255, 1);
 	color: black;
-	border: 1px solid #ccc;
-	& > p {
+	// border: 1px solid #ccc;
+	box-shadow: inset 1px 1px 2px #0008;
+	> p {
 		margin: .5em 0;
 		&:first-child {
 			margin-top: 0;
@@ -137,7 +138,7 @@ td > div {
 tr:not(.entete) {
 	&:hover,
 	&.on {
-		& > td > div {
+		> td > div {
 			display: block;
 		}
 	}
@@ -191,18 +192,18 @@ td:not([class]) {
 	padding: .5em .5em;
 }
 thead th {
-	@hauteur: 5em;
-	height: @hauteur;
+	--hauteur: 5em;
+	height: var(--hauteur);
 	vertical-align: bottom;
 	text-align: center;
 	position: relative;
-	& > span {
+	> span {
 		display: flex;
 		align-items: flex-end;
 		justify-content: flex-end;
 		width: 0;
 		margin: 0 auto;
-		& > em {
+		> em {
 			padding: 0 .5ch;
 			line-height: 0;
 			transform: rotate(90deg);
@@ -295,29 +296,29 @@ label {
 footer {
 	margin-top: 1em;
 }
-.afficher(@classe) {
-	table.@{classe} {
+@mixin afficher($classe) {
+	table.#{$classe} {
 		tbody tr {
-			&:not(.@{classe}):not(.entete) {
+			&:not(.#{$classe}):not(.entete) {
 				display:none;
 			}
 		}
 		td, th {
-			&[class]:not(.@{classe}) {
+			&[class]:not(.#{$classe}) {
 				display:none;
 			}
 		}
-		col[class]:not(.@{classe}) {
+		col[class]:not(.#{$classe}) {
 			display:none;
 		}
 	}
 }
 
-.afficher(liste);
-.afficher(details);
-.afficher(ajout);
-.afficher(modif);
-.afficher(suppr);
+@include afficher('liste');
+@include afficher('details');
+@include afficher('ajout');
+@include afficher('modif');
+@include afficher('suppr');
 
 table.liste, table.details {
 	tbody.traitement {
@@ -342,7 +343,7 @@ table.liste, table.details {
 //	body {
 //		margin: .5in;
 //	}
-	div.interface {}
+	// div.interface {}
 	tbody {
 		background-color: transparent !important;
 	}
@@ -352,7 +353,7 @@ table.liste, table.details {
 	table.cinqpages thead {
 	  background-color: white;
 	  color: black;
-		& th {
+		th {
 		  border-color: unset;
 			&::before {
 				display: none;
