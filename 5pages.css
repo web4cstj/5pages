@@ -13,6 +13,14 @@ div.interface {
   position: relative;
 }
 
+* {
+  margin: 0;
+}
+
+ul {
+  padding-left: 2ch;
+}
+
 h1 {
   text-align: center;
   margin: 0;
@@ -121,7 +129,7 @@ td > div {
   box-shadow: inset 1px 1px 2px #0008;
 }
 td > div > p {
-  margin: 0.5em 0;
+  margin-top: 0.5em;
 }
 td > div > p:first-child {
   margin-top: 0;

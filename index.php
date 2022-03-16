@@ -107,9 +107,15 @@
 					</td>
 				</tr>
 				<tr class="ajout modif suppr">
-					<td>Composition du SQL
+					<td>Composition du SQL de traitement
 						<div>
 							<p>Composition d'une commande SQL de modification de bd en y incluant des paramètres PDO. Un paramètre PDO est un identifiant choisi par vous précédé d'un deux-points. Exemple : <code style="border:1px solid black;">... WHERE id=:id</code></p>
+							<p>Les commandes pour l'ajout, la modification et la suppression :</p>
+							<ul>
+								<li><code>INSERT INTO table (champ1, champ2) VALUES (:champ1, :champ2)</code></li>
+								<li><code>UPDATE table SET champ1=:champ1, champ2=:champ2 WHERE id=:id</code></li>
+								<li><code>DELETE FROM table WHERE id=:id</code></li>
+							</ul>
 						</div>
 					</td>
 				</tr>
@@ -157,6 +163,18 @@
 							<p>Pour fonctionner, ces pages doivent recevoir par l'adresse la clé primaire d'un enregistrement.</p>
 							<p>Si celle-ci n'est pas fournie, soit on affiche un message 404, soit on retourne directement vers la page d'accueil.</p>
 							<p>Mots-clés : <code>$_GET</code>, <code><a target="_blank" href="http://php.net/manual/fr/function.header.php">header</a></code></p>
+						</div>
+					</td>
+				</tr>
+				<tr class="liste details modif">
+					<td>Composition du SQL d'affichage
+						<div>
+							<p>Composition d'une commande SQL pour récupérer des données (SELECT).</p>
+							<p>Les commandes SQL pour l'affichage :</p>
+							<ul>
+								<li><code>SELECT champ1, champ2 FROM table</code></li>
+								<li><code>SELECT * FROM table WHERE id=:id</code></li>
+							</ul>
 						</div>
 					</td>
 				</tr>
